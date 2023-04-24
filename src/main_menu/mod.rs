@@ -4,7 +4,7 @@ use crate::AppState;
 
 use self::systems::{layout::*, interactions::*};
 
-mod components;
+pub mod components;
 mod styles;
 mod systems;
 pub struct MainMenuPlugin;

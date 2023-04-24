@@ -33,7 +33,7 @@ pub fn transition_to_state(keycode: KeyCode, state: AppState)
            mut next_simulation
     | {
         if keyboard_input.just_pressed(keycode) && app_state.0 != state {
-            println!("Entered {:?}", state);
+            info!("Entered {:?}", state);
             next_state.set(state);
             next_simulation.set(SimulationState::Paused);
         }
@@ -73,7 +73,7 @@ pub fn exit_game(
 
 pub fn handle_game_over(mut game_over_event_reader: EventReader<GameOver>, mut next_state: ResMut<NextState<AppState>>) {
     for event in &mut game_over_event_reader {
-        println!("Your final score is: {}", event.score);
+        info!("Your final score is: {}", event.score);
         next_state.set(AppState::GameOver);
     }
 }

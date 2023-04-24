@@ -107,7 +107,7 @@ pub fn enemy_hit_player(
             let enemy_radius = ENEMY_SIZE / 2.0;
 
             if distance < player_radius + enemy_radius {
-                println!("Enemy hit Player! Game Over!");
+                info!("Enemy hit Player! Game Over!");
                 audio.play(assset_server.load("audio/explosionCrunch_000.ogg"));
                 commands.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver { score: score.value });
@@ -131,7 +131,7 @@ pub fn player_hit_star(
             let star_radius = STAR_SIZE / 2.0;
 
             if distance < player_radius + star_radius {
-                println!("Player hit Star!");
+                info!("Player hit Star!");
                 score.value += 1;
                 audio.play(assset_server.load("audio/laserLarge_000.ogg"));
                 commands.entity(star_entity).despawn();

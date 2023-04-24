@@ -3,14 +3,16 @@ mod game;
 mod main_menu;
 mod systems;
 
-use bevy::prelude::*;
+use bevy::{prelude::*, log::LogPlugin};
 use game::GamePlugin;
 use main_menu::MainMenuPlugin;
 use systems::*;
 
 fn main() {
     App::new()
-    .add_plugins(DefaultPlugins)
+    .add_plugins(DefaultPlugins.set(LogPlugin {
+        ..Default::default()
+    }))
     .add_state::<AppState>()
     .add_plugin(MainMenuPlugin)
     .add_plugin(GamePlugin)

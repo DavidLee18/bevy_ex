@@ -1,10 +1,11 @@
 use bevy::prelude::*;
 
+use crate::AppState;
 use crate::game::ui::{
     pause_menu::{
         components::*,
-        styles::PAUSE_MENU_STYLE
-    }, TITLE_STYLE, get_text_bundle, BUTTON_STYLE, NORMAL_BUTTON_COLOR
+        styles::{PAUSE_MENU_STYLE, get_text_bundle}
+    }, TITLE_STYLE, BUTTON_STYLE, NORMAL_BUTTON_COLOR
 };
 
 pub fn spawn_pause_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -55,20 +56,20 @@ pub fn spawn_pause_menu(mut commands: Commands, asset_server: Res<AssetServer>) 
     });
 }
 
-pub fn hide_pause_menu(mut query: Query<&mut Style, With<PauseMenu>>) {
-    if let Ok(mut style) = query.get_single_mut() {
-        style.display = Display::None;
-    }
-}
-
-pub fn show_pause_menu(mut query: Query<&mut Style, With<PauseMenu>>) {
-    if let Ok(mut style) = query.get_single_mut() {
-        style.display = Display::Flex;
-    }
-}
-
 pub fn despawn_pause_menu(mut commands: Commands, query: Query<Entity, With<PauseMenu>>) {
     if let Ok(entity) = query.get_single() {
         commands.entity(entity).despawn_recursive();
+    }
+}
+
+pub fn strap_pause_menu(
+    mut commands: Commands,
+    query: Query<Entity, With<PauseMenu>>,
+    app_state: Res<State<AppState>>
+) {
+    if let Ok(entity) = query.get_single() {
+        if app_state.0 != AppState::Game {
+            commands.entity(entity).despawn_recursive();
+        }
     }
 }

@@ -33,21 +33,6 @@ pub const TITLE_STYLE: Style = Style {
     ..Style::DEFAULT
 };
 
-pub fn get_text_bundle(asset_server: &Res<AssetServer>, text: &str, font_size: f32) -> TextBundle {
-    TextBundle {
-        text: Text {
-            sections: vec![ TextSection::new(text, TextStyle {
-                font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                font_size,
-                color: Color::WHITE,
-            }) ],
-            alignment: TextAlignment::Center,
-            ..Default::default()
-        },
-        ..Default::default()
-    }
-}
-
 pub struct GameUiPlugin;
 
 impl Plugin for GameUiPlugin {

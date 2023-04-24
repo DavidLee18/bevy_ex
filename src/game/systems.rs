@@ -10,11 +10,11 @@ pub fn toggle_simulation(
     if keyboard_input.just_pressed(KeyCode::Space) {
         next_state.0 = match simulation_state.0 {
             SimulationState::Running => {
-                println!("Simulation Paused.");
+                info!("Simulation Paused.");
                 Some(SimulationState::Paused)
             }
             SimulationState::Paused => {
-                println!("Simulation Running.");
+                info!("Simulation Running.");
                 Some(SimulationState::Running)
             },
         }
